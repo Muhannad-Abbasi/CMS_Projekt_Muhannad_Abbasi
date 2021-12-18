@@ -1,0 +1,248 @@
+@keyframes wave {
+    0% {opacity: 0; transform: translateY(15px)}
+    50% {opacity: 1; transform: translateY(0)}
+    100% {opacity: 0; transform: translateY(-15px)}
+}
+.loader ul {
+    margin: 0 0 10px 0;
+    padding: 0;
+    list-style: none;
+    width: 60px;
+    text-align: center;
+    animation: wave 2.5s infinite linear;
+    animation-fill-mode: forwards;
+}
+.loader li {
+    display: inline-block;
+    background: #FAF1D9;
+    height: 30px;
+    width: 9px;
+    border-radius: 0 100%;
+    transform: rotate(12deg);
+}
+.cup {
+    background: #F2E3B4;
+    width: 60px;
+    height: 54px;
+    border-radius: 0 0 50% 50%;
+    position: relative;
+}
+.cup:before {
+    content: "";
+    position: absolute;
+    width: 66px;
+    height: 20px;
+    border-radius: 50%;
+    background: inherit;
+    left: -3px;
+    top: -10px;
+}
+.cup:after {
+    content: "";
+    position: absolute;
+    width: 56px;
+    height: 12px;
+    border-radius: 50%;
+    background: #3A2F28;
+    left: 2px;
+    top: -6px;
+}
+.loader span {
+    background: #F2E3B4;
+    width: 13px;
+    height: 20px;
+    position: absolute; 
+    right: -13px;
+    top: 10px;
+    border-radius: 0 50% 50% 0;
+}
+.loader span:before {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 0;
+    background: #c0c0c0;
+    width: 10px;
+    height: 12px;
+    border-radius: 0 50% 50% 0;
+}
+.loader span:after {
+    content: "";
+    position: absolute;
+    top: 40px;
+    left: -50px;
+    background: #F2E3B4;
+    width: 40px;
+    height: 8px;
+    border-radius: 50%;
+}
+.font {
+    text-align: center;
+    font-family: monospace;
+    font-size: 1.5em;
+}
+
+.book-button {
+    position: relative;
+    padding: .3rem 1rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    background: #060C21;
+    color: #00bcd4;
+    border: hidden;
+    text-transform: uppercase;
+    transition: .5s;
+    overflow: hidden;
+    margin-left: 1rem;
+    cursor: pointer;
+}
+
+.book-button:hover{
+    background: #00bcd4;
+    color: black;
+    box-shadow: 0px 0px 30px #00bcd4;
+}
+
+.book-button::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10px;
+    height: 10px;
+    border-top: 2px solid #00bcd4;
+    border-left: 2px solid #00bcd4;
+    transition: .5s;
+}
+
+.book-button:hover::before{
+    width: 100%;
+    height: 100%;
+}
+
+.book-button::after{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 10px;
+    height: 10px;
+    border-bottom: 2px solid #00bcd4;
+    border-right: 2px solid #00bcd4;
+    transition: .5s;
+}
+
+.book-button:hover::after{
+    width: 100%;
+    height: 100%;
+}
+
+.movie-button {
+    position: relative;
+    padding: .3rem 1rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    background: #060C21;
+    color: #ff005e;
+    border: hidden;
+    text-transform: uppercase;
+    transition: .5s;
+    overflow: hidden;
+    margin-left: 1rem;
+    cursor: pointer;
+}
+
+.movie-button:hover{
+    background: #ff005e;
+    color: black;
+    box-shadow: 0px 0px 30px #ff005e;
+}
+
+.movie-button::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10px;
+    height: 10px;
+    border-top: 2px solid #ff005e;
+    border-left: 2px solid #ff005e;
+    transition: .5s;
+}
+
+.movie-button:hover::before{
+    width: 100%;
+    height: 100%;
+}
+
+.movie-button::after{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 10px;
+    height: 10px;
+    border-bottom: 2px solid #ff005e;
+    border-right: 2px solid #ff005e;
+    transition: .5s;
+}
+
+.movie-button:hover::after{
+    width: 100%;
+    height: 100%;
+}
+
+.book-movie-button {
+    position: relative;
+    padding: .3rem 1rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    background: #060C21;
+    color: #00d45f;
+    border: hidden;
+    text-transform: uppercase;
+    transition: .5s;
+    overflow: hidden;
+    margin-left: 1rem;
+    cursor: pointer;
+}
+
+.book-movie-button:hover{
+    background: #00d45f;
+    color: black;
+    box-shadow: 0px 0px 30px #00d45f;
+}
+
+.book-movie-button::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10px;
+    height: 10px;
+    border-top: 2px solid #00d45f;
+    border-left: 2px solid #00d45f;
+    transition: .5s;
+}
+
+.book-movie-button:hover::before{
+    width: 100%;
+    height: 100%;
+}
+
+.book-movie-button::after{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 10px;
+    height: 10px;
+    border-bottom: 2px solid #00d45f;
+    border-right: 2px solid #00d45f;
+    transition: .5s;
+}
+
+.book-movie-button:hover::after{
+    width: 100%;
+    height: 100%;
+}
