@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Dashboard = () => {
+const DashboardView = () => {
   const classes = useStyles();
 
   return (
@@ -33,28 +33,6 @@ const Dashboard = () => {
       <Container maxWidth={false}>
         <Card>
           <Box className={classes.style}>
-            <Box>
-              <div className="loader">
-                <ul>
-                  <li />
-                  <li />
-                  <li />
-                </ul>
-                <div className="cup">
-                  <span />
-                </div>
-              </div>
-            </Box>
-            <Box sx={{ width: '50%', mt: 2 }}>
-              <p className="font">
-                Dashboard page is under construction at the moment
-                <br />
-                Muhannad made this cup of coffee and forgot it here
-                <br />
-                Take it before he comes back&#44; and enjoy it while you&#39;re browsing our website
-                &#58;P
-              </p>
-            </Box>
             <RouterLink to="/books">
                 <button className='book-button'>Books</button>
             </RouterLink>
@@ -71,4 +49,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default DashboardView;
