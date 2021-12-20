@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Card } from '@material-ui/core';
+import { Card, CardContent, CardMedia, Typography, Button, CardActionArea, CardActions } from '@material-ui/core';
 
 const Content = () => {
+
+  const apiUrl = 'http://localhost:1337';
 
   const [ books, setBooks ] = useState([]);
 
@@ -33,11 +35,38 @@ const Content = () => {
       rate 
     } = attributes;
 
-    return <Card>
-    <p>{title}</p>
-    <p>{length}</p>
-    <p>{releaseDate}</p>
-    <p>{rate}</p>
+    return <Card sx={{ maxWidth: 345 }}>
+      <CardActionArea>
+        { attributes.cover.data.map( ({attributes}) => {
+            const { url, alternativeText } = attributes;
+            return <CardMedia
+            component="img"
+            height="140"
+            image={`${apiUrl}${url}`}
+            alt={alternativeText}
+          />
+        })}
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            {title}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Release Date: {releaseDate}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Rate: {rate}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Length: {length}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+      <CardActions>
+        {attributes.genres.data.map( ({attributes}) => {
+          const { typeOfBookOrMovie } = attributes;
+          return <Button size="small" color="primary">{ typeOfBookOrMovie }</Button>
+        })}
+      </CardActions>
     </Card>
     })}
   </>
