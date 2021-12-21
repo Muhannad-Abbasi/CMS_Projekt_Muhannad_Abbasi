@@ -1,11 +1,47 @@
 import { useState, useEffect } from 'react';
-import { Card, CardContent, CardMedia, Typography, Button, CardActionArea, CardActions } from '@material-ui/core';
+import { Card, CardContent, CardMedia, Typography, Button, CardActionArea, CardActions, makeStyles } from '@material-ui/core';
+
+const useStyles = makeStyles(() => ({
+  style: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    width: '15rem',
+    margin: 6,
+    position: 'relative',
+    backgroundColor: 'whitesmoke'
+  },
+  resImg: {
+    maxWidth: '100%',
+    height: 'auto',
+    filter: 'drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))',
+    objectFit: 'contain'
+  },
+  rate: {
+    position: 'absolute',
+    top: 15,
+    fontSize: '1.5rem',
+    color: 'yellow',
+    textShadow: '0px 4px 4px rgba(0, 0, 0, 2.25)'
+  },
+  font: {
+    fontWeight: 'bold',
+    color: 'white',
+    textShadow: '0px 4px 4px rgba(0, 0, 0, 2.25)'
+  },
+  buttonCenter: {
+    justifyContent: 'center',
+    borderTop: '1px solid rgb(194, 194, 194)'
+  }
+}));
 
 const Content = () => {
 
   const apiUrl = 'http://localhost:1337';
 
-  const [ books, setBooks ] = useState([]);
+  const classes = useStyles();
+
+  const [ movies, setMovies ] = useState([]);
 
   const getData = async () => {
     try {
@@ -14,7 +50,7 @@ const Content = () => {
       const code = response.status;
       if ( code >= 200 && code < 300 ) {
         // console.log(json.data);
-        setBooks(json.data);
+        setMovies(json.data);
       }
     } catch (err) {
       console.log(err)
@@ -26,7 +62,7 @@ const Content = () => {
   }, [])
 
   return <>
-    { books.map(({attributes}) => {
+    { movies.map(({attributes}) => {
     
     const { 
       title, 
@@ -35,13 +71,13 @@ const Content = () => {
       rate 
     } = attributes;
 
-    return <Card sx={{ maxWidth: 345 }}>
+    return <Card className={classes.style}>
       <CardActionArea>
         { attributes.cover.data.map( ({attributes}) => {
             const { url, alternativeText } = attributes;
             return <CardMedia
             component="img"
-            height="140"
+            className={classes.resImg}
             image={`${apiUrl}${url}`}
             alt={alternativeText}
           />
@@ -53,15 +89,15 @@ const Content = () => {
           <Typography variant="body2" color="text.secondary">
             Release Date: {releaseDate}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Rate: {rate}
+          <Typography className={classes.rate}>
+            <i class="fas fa-star"></i> <span className={classes.font}>{rate}</span>
           </Typography>
           <Typography variant="body2" color="text.secondary">
             Length: {length}
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions>
+      <CardActions className={classes.buttonCenter} >
         {attributes.genres.data.map( ({attributes}) => {
           const { typeOfBookOrMovie } = attributes;
           return <Button size="small" color="primary">{ typeOfBookOrMovie }</Button>

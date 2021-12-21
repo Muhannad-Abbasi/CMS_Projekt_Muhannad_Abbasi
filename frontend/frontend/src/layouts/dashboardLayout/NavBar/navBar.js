@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { AppBar, Toolbar, Box, makeStyles } from '@material-ui/core';
 import logo from '../assets/logo.jpg';
@@ -13,7 +13,8 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
     }),
-    backgroundColor: 'black'
+    backgroundColor: 'black',
+    boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.35)'
   },
   toolbar: {
     display: 'flex',

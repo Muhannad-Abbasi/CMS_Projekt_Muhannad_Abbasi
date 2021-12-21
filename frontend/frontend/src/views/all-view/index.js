@@ -1,6 +1,6 @@
+import React from 'react';
 import { Container, makeStyles } from '@material-ui/core';
 import Page from '../../components/Page';
-import Content from './movies-content/Content'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -9,27 +9,21 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(3),
     paddingTop: theme.spacing(3),
   },
-  style: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'center'
-  }
 }));
 
-const MoviesView = () => {
-
+const AllView = () => {
   const classes = useStyles();
 
   return (
     <Page
       className={classes.root}
-      title={'Books'}
+      title={'Books & Movies'}
     >
-      <Container className={classes.style}>
-        <Content />
+      <Container maxWidth={false}>
+          
       </Container>
     </Page>
   )
 }
 
-export default MoviesView;
+export default AllView;

@@ -9,6 +9,11 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(3),
     paddingTop: theme.spacing(3),
   },
+  style: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center'
+  }
 }));
 
 const BooksView = () => {
@@ -20,7 +25,7 @@ const BooksView = () => {
       className={classes.root}
       title={'Books'}
     >
-      <Container maxWidth={false}>
+      <Container className={classes.style}>
         <Content />
       </Container>
     </Page>
