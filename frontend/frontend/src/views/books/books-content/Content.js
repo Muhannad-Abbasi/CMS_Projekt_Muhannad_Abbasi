@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-// import Loading from '../../../components/Loading';
 import { Card, CardContent, CardMedia, Typography, Button, CardActionArea, CardActions, makeStyles } from '@material-ui/core';
+import { NavLink as RouterLink } from 'react-router-dom';
+import Loading from '../../../components/Loading';
 
 const useStyles = makeStyles(() => ({
   style: {
@@ -43,8 +44,12 @@ const Content = () => {
   const classes = useStyles();
 
   const [ books, setBooks ] = useState([]);
+  const [loading, setLoading] = useState(true);
+
 
   const getData = async () => {
+    setLoading(true)
+
     try {
       const response = await fetch("http://localhost:1337/api/books?populate=*");
       const json = await response.json();
@@ -52,15 +57,19 @@ const Content = () => {
       if ( code >= 200 && code < 300 ) {
         // console.log(json.data);
         setBooks(json.data);
+        setLoading(false);
       }
     } catch (err) {
-      console.log(err)
+      console.log(err);
+      setLoading(false);
     }
   }
   
   useEffect(() => {
-    getData()
+    getData();
   }, [])
+
+  if(loading) return <Loading />
 
   return <>
     { books.map(({attributes}) => {
@@ -88,20 +97,23 @@ const Content = () => {
               {Title}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Release Date: {Author}
+              Author: {Author}
             </Typography>
             <Typography className={classes.rate}>
               <i class="fas fa-star"></i> <span className={classes.font}>{rate}</span>
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Length: {numberOfPages}
+              Number of pages: {numberOfPages}
             </Typography>
           </CardContent>
         </CardActionArea>
         <CardActions className={classes.buttonCenter} >
-          {attributes.genres.data.map( ({attributes}) => {
-            const { typeOfBookOrMovie } = attributes;
-            return <Button size="small" color="primary">{ typeOfBookOrMovie }</Button>
+          {attributes.genres.data.map( (genre) => {
+            return (
+              <RouterLink key={genre.id} to={`/genre/${genre.id}`}>
+                <Button size="small" color="primary">{ genre.attributes.typeOfBookOrMovie }</Button>
+              </RouterLink>
+            )
           })}
         </CardActions>
       </Card>

@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardMedia, Typography, Button, CardActionArea, CardActions, makeStyles } from '@material-ui/core';
+import { NavLink as RouterLink } from 'react-router-dom';
+import Loading from '../../../components/Loading';
 
 const useStyles = makeStyles(() => ({
   style: {
@@ -42,24 +44,28 @@ const Content = () => {
   const classes = useStyles();
 
   const [ movies, setMovies ] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const getData = async () => {
     try {
-      const response = await fetch("http://localhost:1337/api/movies?populate=*");
+      const response = await fetch(`${apiUrl}/api/movies?populate=*`);
       const json = await response.json();
       const code = response.status;
       if ( code >= 200 && code < 300 ) {
-        // console.log(json.data);
         setMovies(json.data);
+        setLoading(false);
       }
     } catch (err) {
-      console.log(err)
+      console.log(err);
+      setLoading(false)
     }
   }
   
   useEffect(() => {
-    getData()
+    getData();
   }, [])
+
+  if(loading) return <Loading />
 
   return <>
     { movies.map(({attributes}) => {
@@ -98,9 +104,12 @@ const Content = () => {
         </CardContent>
       </CardActionArea>
       <CardActions className={classes.buttonCenter} >
-        {attributes.genres.data.map( ({attributes}) => {
-          const { typeOfBookOrMovie } = attributes;
-          return <Button size="small" color="primary">{ typeOfBookOrMovie }</Button>
+        {attributes.genres.data.map( (genre) => {
+          return (
+            <RouterLink key={genre.id} to={`/genre/${genre.id}`}>
+              <Button size="small" color="primary">{ genre.attributes.typeOfBookOrMovie }</Button>
+            </RouterLink>
+          )
         })}
       </CardActions>
     </Card>

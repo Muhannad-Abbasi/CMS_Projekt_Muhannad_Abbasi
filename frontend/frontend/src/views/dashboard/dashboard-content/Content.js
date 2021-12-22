@@ -8,11 +8,13 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
+    alignItems: 'center',
     width: '25rem',
     height: '25rem',
     margin: 6,
     position: 'relative',
-    backgroundColor: 'whitesmoke'
+    backgroundColor: '#010615',
+    borderRadius: '1rem'
   },
 }));
 
@@ -21,7 +23,6 @@ const Content = () => {
   const classes = useStyles();
 
   return (
-    <Card>
       <Box className={classes.style}>
         <RouterLink to="/books">
           <button className='book-button'>Books</button>
@@ -33,7 +34,6 @@ const Content = () => {
           <button className='book-movie-button'>Books &amp; Movies</button>
         </RouterLink>
       </Box>
-    </Card>
   )
 }
 
