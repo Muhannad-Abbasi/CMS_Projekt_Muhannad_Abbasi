@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
-import { useQuery, gql } from '@apollo/client'
-import { useParams, Link } from 'react-router-dom'
-import { Box, Card, CardContent, CardMedia, Typography, Button, CardActionArea, CardActions, makeStyles, Divider } from '@material-ui/core';
-import { NavLink as RouterLink } from 'react-router-dom';
+import { useParams } from 'react-router-dom'
+import { Box, Card, CardContent, Typography, makeStyles, Divider } from '@material-ui/core';
 import Loading from '../../../components/Loading';
 
 const useStyles = makeStyles(() => ({
@@ -11,9 +9,10 @@ const useStyles = makeStyles(() => ({
     flexDirection: 'column',
     justifyContent: 'space-between',
     width: '15rem',
+    height: '14rem',
     margin: 6,
     position: 'relative',
-    backgroundColor: 'whitesmoke'
+    backgroundColor: 'whitesmoke',
   },
   resImg: {
     maxWidth: '100%',
@@ -22,8 +21,6 @@ const useStyles = makeStyles(() => ({
     objectFit: 'contain'
   },
   rate: {
-    position: 'absolute',
-    top: 15,
     fontSize: '1.5rem',
     color: 'yellow',
     textShadow: '0px 4px 4px rgba(0, 0, 0, 2.25)'
@@ -50,6 +47,19 @@ const useStyles = makeStyles(() => ({
     display: 'inline-block',
     width: '5rem',
   },
+  space: {
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    padding: 16
+  },
+  start: {
+    borderBottom: '1px solid rgb(194, 194, 194)'
+  },
+  end: {
+    borderTop: '1px solid rgb(194, 194, 194)'
+  }
 }));
 
 const Content = () => {
@@ -80,7 +90,7 @@ const Content = () => {
   }
   
   useEffect(() => {
-    getData()
+    getData();
   }, [])
 
   if(loading) return <Loading />
@@ -99,47 +109,35 @@ const Content = () => {
       Title, 
       Author, 
       numberOfPages, 
-      rate
+      rate,
+      type
       } = attributes;
 
       return (
         <Card className={classes.style}>
-          <CardActionArea>
-            {/* { attributes.cover.map( ({attributes}) => {
-                const { url, alternativeText } = attributes;
-                return <CardMedia
-                component="img"
-                className={classes.resImg}
-                image={`${apiUrl}${url}`}
-                alt={alternativeText}
-                />
-            })} */}
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
+          <Box className={classes.space}>
+            <Box className={classes.start}>
+              <Typography gutterBottom variant="h6" component="div">
                 {Title}
               </Typography>
+            </Box>
+            <Box>
               <Typography variant="body2" color="text.secondary">
                 Author: {Author}
               </Typography>
-              <Typography className={classes.rate}>
-                <i class="fas fa-star"></i> <span className={classes.font}>{rate}</span>
+              <Typography variant="body2" color="text.secondary">
+                Type: {type}
               </Typography>
               <Typography variant="body2" color="text.secondary">
                 Number of pages: {numberOfPages}
               </Typography>
-            </CardContent>
-          </CardActionArea>
-          <CardActions className={classes.buttonCenter} >
-            {/* {attributes.genres.data.map( (genre) => {
-              // const { typeOfBookOrMovie } = attributes;
-              console.log(genre.attributes.typeOfBookOrMovie)
-              return (
-                <RouterLink key={genre.id} to={`/genre/${genre.id}`}>
-                  <Button size="small" color="primary">{ genre.attributes.typeOfBookOrMovie }</Button>
-                </RouterLink>
-              )
-            })} */}
-          </CardActions>
+            </Box>
+            <Box className={classes.end}>
+              <Typography className={classes.rate}>
+                <i class="fas fa-star"></i> <span className={classes.font}>{rate}</span>
+              </Typography>
+            </Box>
+          </Box>
         </Card>
       )
     })}
@@ -150,42 +148,35 @@ const Content = () => {
         title, 
         length, 
         releaseDate, 
-        rate 
+        rate,
+        type
       } = attributes;
 
       return (
         <Card className={classes.style}>
-            <CardActionArea>
-                {/* { attributes.cover.data.map( ({attributes}) => {
-                    const { url, alternativeText } = attributes;
-                    return <CardMedia
-                    component="img"
-                    className={classes.resImg}
-                    image={`${apiUrl}${url}`}
-                    alt={alternativeText}
-                />
-                })} */}
-                <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                    {title}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                    Release Date: {releaseDate}
-                </Typography>
-                <Typography className={classes.rate}>
-                    <i class="fas fa-star"></i> <span className={classes.font}>{rate}</span>
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                    Length: {length}
-                </Typography>
-                </CardContent>
-            </CardActionArea>
-            {/* <CardActions className={classes.buttonCenter} >
-                {attributes.genres.data.map( ({attributes}) => {
-                const { typeOfBookOrMovie } = attributes;
-                return <Button size="small" color="primary">{ typeOfBookOrMovie }</Button>
-                })}
-            </CardActions> */}
+          <CardContent className={classes.space}>
+            <Box className={classes.start}>
+              <Typography gutterBottom variant="h6" component="div">
+                {title}
+              </Typography>
+            </Box>
+            <Box>
+              <Typography variant="body2" color="text.secondary">
+                  Release Date: {releaseDate}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                  Type: {type}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                  Length: {length}
+              </Typography>
+            </Box>
+            <Box className={classes.end}>
+              <Typography className={classes.rate}>
+                  <i class="fas fa-star"></i> <span className={classes.font}>{rate}</span>
+              </Typography>
+            </Box>
+          </CardContent>
         </Card>
       )
     })}

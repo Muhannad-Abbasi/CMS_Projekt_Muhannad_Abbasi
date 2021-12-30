@@ -42,6 +42,11 @@
       "relation": "manyToMany",
       "target": "api::genre.genre",
       "mappedBy": "books"
+    },
+    "type": {
+      "type": "string",
+      "required": true,
+      "unique": false
     }
   }
 }

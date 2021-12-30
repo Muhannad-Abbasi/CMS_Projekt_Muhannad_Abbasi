@@ -34,6 +34,9 @@ const useStyles = makeStyles(() => ({
   buttonCenter: {
     justifyContent: 'center',
     borderTop: '1px solid rgb(194, 194, 194)'
+  },
+  links: {
+    textDecoration: 'none'
   }
 }));
 
@@ -78,7 +81,8 @@ const Content = () => {
         Title, 
         Author, 
         numberOfPages, 
-        rate
+        rate,
+        type
       } = attributes;
 
       return <Card className={classes.style}>
@@ -99,6 +103,9 @@ const Content = () => {
             <Typography variant="body2" color="text.secondary">
               Author: {Author}
             </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Type: {type}
+            </Typography>
             <Typography className={classes.rate}>
               <i class="fas fa-star"></i> <span className={classes.font}>{rate}</span>
             </Typography>
@@ -110,7 +117,7 @@ const Content = () => {
         <CardActions className={classes.buttonCenter} >
           {attributes.genres.data.map( (genre) => {
             return (
-              <RouterLink key={genre.id} to={`/genre/${genre.id}`}>
+              <RouterLink key={genre.id} to={`/genre/${genre.id}`} className={classes.links}>
                 <Button size="small" color="primary">{ genre.attributes.typeOfBookOrMovie }</Button>
               </RouterLink>
             )
